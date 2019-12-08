@@ -60,8 +60,6 @@ public class SapJobAll {
     //@Scheduled(cron = "${scheduled.cron}")
     //@Scheduled(fixedDelay = 6000 * 20)
     public void run() {
-        if (RunController.recordWeb == 0) {
-            record = 1;
             try {
                 // 首先执行的是4.3,4.3执行结束执行4.4。如果4.3没有发现可执行文件，就直接执行4.4.
                 log.info("SapJobAllJob 开始执行任务：" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
@@ -87,12 +85,7 @@ public class SapJobAll {
             } catch (Exception e) {
                 e.printStackTrace();
                 log.error("SapJobAllJob 执行任务异常：" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"), e);
-            } finally {
-                record = 0;
             }
-        } else {
-            log.info("前台页面端触发执行，本次定时任务不执行！");
-        }
 
     }
 

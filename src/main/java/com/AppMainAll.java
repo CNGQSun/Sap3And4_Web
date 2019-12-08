@@ -1,12 +1,6 @@
 package com;
 
-import java.io.*;
-import java.util.Properties;
-
-import com.job.SapJobAll;
-import org.apache.commons.lang3.StringUtils;
 import org.mybatis.spring.annotation.MapperScan;
-import org.python.antlr.ast.Str;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -15,9 +9,6 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.PropertySource;
-
-import javax.servlet.ServletContext;
 
 /**
  * 4.3 ，4.4 自动job的启动入口
@@ -30,9 +21,6 @@ import javax.servlet.ServletContext;
 //@PropertySource(value = {"classpath:config.properties", "file:${spring.config.location}/config.properties"}, ignoreResourceNotFound = true)
 public class AppMainAll extends SpringBootServletInitializer {
     private static Logger log = LoggerFactory.getLogger(AppMainAll.class);
-
-
-
     /**
      * 为打war包重写configure
      * @param application
