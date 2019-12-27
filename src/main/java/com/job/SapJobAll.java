@@ -92,7 +92,7 @@ public class SapJobAll {
     public void excuteSap3() throws Exception {
         try {
 
-            // 执行bat脚本开始，本地测试时候可以将代码注释掉
+/*            // 执行bat脚本开始，本地测试时候可以将代码注释掉
             String batPath = p.getProperty("sap3.bat");
 
             File bathFile = new File(batPath);
@@ -112,7 +112,7 @@ public class SapJobAll {
             in.close();
             pro.waitFor();
             log.info("Sap4.3执行bat文件结束" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            // 执行bat脚本结束
+            // 执行bat脚本结束*/
 
             String backOrderPath = p.getProperty("sap3.back.order");
             File backOrderFile = new File(backOrderPath);
@@ -120,14 +120,13 @@ public class SapJobAll {
                 log.info("Sap4.3没有发现Back_Order.txt文件");
                 return;
             }
-            String creditPath = p.getProperty("sap3.credit.limit");
+/*            String creditPath = p.getProperty("sap3.credit.limit");
             File creditFile = new File(creditPath);
             if (!creditFile.exists()) {
                 log.info("Sap4.3没有发现credit_limit.txt文件");
                 return;
-            }
-            mapper.saveOrUpdateData("truncate table BACK_ORDER_43;truncate table "
-                    + " CREDIT_LIMIT;truncate table PY_SALES_MAPPING;truncate table SIGMA;truncate"
+            }*/
+            mapper.saveOrUpdateData("truncate table BACK_ORDER_43;truncate table PY_SALES_MAPPING;truncate table SIGMA;truncate"
                     + " table ZCOP_AGING;truncate table SCORING;truncate table ORDERING;truncate table T_RELEASE_ORDER_EXCLUDE_PO;");
 
             List<String> title = new ArrayList<String>();
@@ -161,14 +160,7 @@ public class SapJobAll {
             }
 
 
-            mapper.saveOrUpdateData("update BACK_ORDER_43 set TOTAL_AMT='0' where TOTAL_AMT='';");
-
-
-            //文件中包含标题
-            List<String> titlecreateLimit = new ArrayList<String>();
-            titlecreateLimit.add("Description");
-            titlecreateLimit.add("Partner");
-            com.merck.utils.CSVUtil.readCsv(creditFile, "utf-8", titlecreateLimit, bean3, "CREDIT_LIMIT");
+            mapper.saveOrUpdateData("update BACK_ORDER_43 set TOTAL_AMT='0' where TOTAL_AMT='';h");
 
             // 导入py_sales_mapping.xlsx
             String pySalesMappingPath = p.getProperty("sap3.py.sales.mapping");
@@ -354,11 +346,6 @@ public class SapJobAll {
             File backUpbackOrder = new File(backUpPath + backUpbackOrderfileName);
             boolean renameTo = backOrderFile.renameTo(backUpbackOrder);
             log.info("Sap4.3 备份back_order.txt 到" + backUpbackOrder.getAbsolutePath() + (renameTo ? "成功" : "失败"));
-
-            String backUpCreditLimitfileName = creditFile.getName().replace(".txt", dateStr + ".txt");
-            File backUpcreditFile = new File(backUpPath + backUpCreditLimitfileName);
-            boolean renameTo2 = creditFile.renameTo(backUpcreditFile);
-            log.info("Sap4.3 备份credit_limit.txt 到" + backUpcreditFile.getAbsolutePath() + (renameTo2 ? "成功" : "失败"));
 
             String triggerFilefileName = triggerFile.getName().replace(".txt", dateStr + ".txt");
             File backUporderingFileFile = new File(backUpPath + triggerFilefileName);

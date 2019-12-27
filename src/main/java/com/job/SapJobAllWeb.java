@@ -103,14 +103,13 @@ public class SapJobAllWeb {
                 log.info("Sap4.3没有发现Back_Order.txt文件");
                 return;
             }
-            String creditPath = p.getProperty("sap3.credit.limit");
+           /* String creditPath = p.getProperty("sap3.credit.limit");
             File creditFile = new File(creditPath);
             if (!creditFile.exists()) {
                 log.info("Sap4.3没有发现credit_limit.txt文件");
                 return;
-            }
-            mapper.saveOrUpdateData("truncate table BACK_ORDER_43;truncate table "
-                    + " CREDIT_LIMIT;truncate table PY_SALES_MAPPING;truncate table SIGMA;truncate"
+            }*/
+            mapper.saveOrUpdateData("truncate table BACK_ORDER_43;truncate table PY_SALES_MAPPING;truncate table SIGMA;truncate"
                     + " table ZCOP_AGING;truncate table SCORING;truncate table ORDERING;truncate table T_RELEASE_ORDER_EXCLUDE_PO;");
 
             List<String> title = new ArrayList<String>();
@@ -146,12 +145,6 @@ public class SapJobAllWeb {
 
             mapper.saveOrUpdateData("update BACK_ORDER_43 set TOTAL_AMT='0' where TOTAL_AMT='';");
 
-
-            //文件中包含标题
-            List<String> titlecreateLimit = new ArrayList<String>();
-            titlecreateLimit.add("Description");
-            titlecreateLimit.add("Partner");
-            com.merck.utils.CSVUtil.readCsv(creditFile, "utf-8", titlecreateLimit, bean3, "CREDIT_LIMIT");
 
             // 导入py_sales_mapping.xlsx
             String pySalesMappingPath = p.getProperty("sap3.py.sales.mapping");
@@ -341,10 +334,6 @@ public class SapJobAllWeb {
             boolean renameTo = backOrderFile.renameTo(backUpbackOrder);
             log.info("Sap4.3 备份back_order.txt 到" + backUpbackOrder.getAbsolutePath() + (renameTo ? "成功" : "失败"));
 
-            String backUpCreditLimitfileName = creditFile.getName().replace(".txt", dateStr + ".txt");
-            File backUpcreditFile = new File(backUpPath + backUpCreditLimitfileName);
-            boolean renameTo2 = creditFile.renameTo(backUpcreditFile);
-            log.info("Sap4.3 备份credit_limit.txt 到" + backUpcreditFile.getAbsolutePath() + (renameTo2 ? "成功" : "失败"));
 
             //备份 放单建议.xlsx
             boolean ordering = false;

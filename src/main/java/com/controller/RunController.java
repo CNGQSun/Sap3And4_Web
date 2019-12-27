@@ -47,7 +47,7 @@ public class RunController {
      * @param request
      * @return
      */
-   /* @RequestMapping("/run")
+    @RequestMapping("/run")
     @ResponseBody
     public Result click(HttpServletRequest request) {
         try {
@@ -80,13 +80,12 @@ public class RunController {
         }
         return new Result(203, "定时任务正在进行，请稍后重试！");
     }
-*/
     /**
      * 运行程序_Idea工具端
      * @param request
      * @return
      */
-    @RequestMapping("/run")
+    /*@RequestMapping("/run")
     @ResponseBody
     public Result click(HttpServletRequest request) {
         try {
@@ -119,6 +118,6 @@ public class RunController {
         }
         return new Result(203, "定时任务正在进行，请稍后重试！");
 
-    }
+    }*/
 }
 

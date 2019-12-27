@@ -36,18 +36,16 @@ public class SqlStr {
             "			 select t.*,    \r\n" +
             "			 case when cast(REPLACE(ISNULL(t.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2))=0.00     \r\n" +
             "			 then null     \r\n" +
-            "			 else  cast((t.overruns/t.CREDIT_LIMIT) as NUMERIC(20,6))    \r\n" +
+            "			 else  cast((t.overruns/REPLACE(t.CREDIT_LIMIT, ',', '')) as NUMERIC(20,6))    \r\n" +
             "			 end DEVIATION    \r\n" +
             "			  from (    \r\n" +
             "			     \r\n" +
             "			 select DISTINCT     \r\n" +
-            "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,b.CREDIT_LIMIT,e.CC CC,a.CR_EXPOS EXPOSURE,    \r\n" +
+            "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,a.CREDIT_LIMIT,e.CC CC,a.CR_EXPOS EXPOSURE,    \r\n" +
             "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(c.TOTAL_AR, '0'), ',', '') as NUMERIC(20,2)) OPEN_ORDER,    \r\n" +
-            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(b.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
+            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(a.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
             "			 c.TOTAL_AR RECEIVABLES, REPLACE(c.DAYS_30_M, '- 0', '0') DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
             "			 from BACK_ORDER_43 a    \r\n" +
-            "			 left join     \r\n" +
-            "			 CREDIT_LIMIT b on a.PARTNER=b.PARTNER    \r\n" +
             "			 LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER    \r\n" +
             "			 LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER    \r\n" +
             "			 LEFT JOIN (    \r\n" +
@@ -91,18 +89,16 @@ public class SqlStr {
             "			 select t.*,    \r\n" +
             "			 case when cast(REPLACE(ISNULL(t.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2))=0.00     \r\n" +
             "			 then null     \r\n" +
-            "			 else  cast((t.overruns/t.CREDIT_LIMIT) as NUMERIC(20,6))    \r\n" +
+            "			 else  cast((t.overruns/REPLACE(t.CREDIT_LIMIT, ',', '')) as NUMERIC(20,6))    \r\n" +
             "			 end DEVIATION    \r\n" +
             "			  from (    \r\n" +
             "			     \r\n" +
             "			 select DISTINCT     \r\n" +
-            "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION ,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,b.CREDIT_LIMIT,e.CC CC,a.CR_EXPOS EXPOSURE,    \r\n" +
+            "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION ,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,a.CREDIT_LIMIT,e.CC CC,a.CR_EXPOS EXPOSURE,    \r\n" +
             "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(c.TOTAL_AR, '0'), ',', '') as NUMERIC(20,2)) OPEN_ORDER,    \r\n" +
-            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(b.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
+            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(a.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
             "			 c.TOTAL_AR RECEIVABLES, REPLACE(c.DAYS_30_M, '- 0', '0') DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
             "			 from BACK_ORDER_43 a    \r\n" +
-            "			 left join     \r\n" +
-            "			 CREDIT_LIMIT b on a.PARTNER=b.PARTNER    \r\n" +
             "			 LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER    \r\n" +
             "			 LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER    \r\n" +
             "			 LEFT JOIN (    \r\n" +
@@ -116,7 +112,7 @@ public class SqlStr {
     public static String No_Bill_of_Lading_Opinion = "SELECT\r\n" + "	*\r\n" + "FROM\r\n" + "	(\r\n"
             + "		SELECT DISTINCT\r\n" + "			a.DOCUMENT_NUMBER,\r\n" + "			a.PARTNER,\r\n"
             + "			e.CC CC,\r\n" + "			rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) NAME1 \r\n" + "		FROM\r\n"
-            + "			BACK_ORDER_43 a\r\n" + "		LEFT JOIN CREDIT_LIMIT b ON a.PARTNER = b.PARTNER\r\n"
+            + "			BACK_ORDER_43 a\r\n"
             + "		LEFT JOIN ZCOP_AGING c ON a.PARTNER = c.CUSTOMER\r\n"
             + "			   LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER     LEFT JOIN ( \r\n"
             + "			   select t1.CC,t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1 \r\n"
@@ -127,7 +123,6 @@ public class SqlStr {
 
     public static String No_Debt_Card = "  select *       from (      select DISTINCT   \r\n" +
             "			   a.DOCUMENT_NUMBER,a.PARTNER,e.CC CC,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) NAME1 ,  REPLACE(DAYS_30_M, '- 0', '0')DAYS_30_M       from BACK_ORDER_43 a  \r\n" +
-            "			   left join       CREDIT_LIMIT b on a.PARTNER=b.PARTNER  \r\n" +
             "			   LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER      LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER  \r\n" +
             "			   LEFT JOIN (  \r\n" +
             "			   select t1.CC,t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1  \r\n" +
@@ -189,18 +184,16 @@ public class SqlStr {
             "			 select t.*,    \r\n" +
             "			 case when cast(REPLACE(ISNULL(t.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2))=0.00     \r\n" +
             "			 then null     \r\n" +
-            "			 else  cast((t.overruns/t.CREDIT_LIMIT) as NUMERIC(20,6))    \r\n" +
+            "			 else  cast((t.overruns/REPLACE(t.CREDIT_LIMIT, ',', '')) as NUMERIC(20,6))    \r\n" +
             "			 end DEVIATION    \r\n" +
             "			  from (    \r\n" +
             "			     \r\n" +
             "			 select DISTINCT     \r\n" +
-            "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,b.CREDIT_LIMIT,b.MANAGED_BY CC,a.CR_EXPOS EXPOSURE,    \r\n" +
+            "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,a.CREDIT_LIMIT,a.CR_EXPOS EXPOSURE,    \r\n" +
             "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(c.TOTAL_AR, '0'), ',', '') as NUMERIC(20,2)) OPEN_ORDER,    \r\n" +
-            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(b.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
+            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(a.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
             "			 c.TOTAL_AR RECEIVABLES, REPLACE(c.DAYS_30_M, '- 0', '0') DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
             "			 from BACK_ORDER_43 a    \r\n" +
-            "			 left join     \r\n" +
-            "			 CREDIT_LIMIT b on a.PARTNER=b.PARTNER    \r\n" +
             "			 LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER    \r\n" +
             "			 LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER    \r\n" +
             "			 LEFT JOIN (    \r\n" +
