@@ -108,7 +108,7 @@ public class SqlStr {
 			+ "			   , ABSTRACT      , RE_PAY_NAME      , RE_PAY_AC      , TRA_TYPE      , STACEY_YIN  \r\n"
 			+ "			   , NEED_CHECK      , ACCOUNT      ,SPHIL_YU      ,PARTNER PAYER,PO=(    \r\n"
 			+ "			   select pos from gg as b where a.loan=b.loan and a.balance=b.balance and a.re_pay_name=b.re_pay_name)  from (select * from gg t2 where not  \r\n"
-			+ "			   EXISTS (select 1 from gg t3 where t2.total=t3.total AND t2.re_pay_name = t3.re_pay_name GROUP BY loan,balance,re_pay_name HAVING count(1)>1 )  \r\n"
+			+ "			   EXISTS (select 1 from gg t3 where t2.loan=t3.loan AND t2.balance = t3.balance AND t2.re_pay_name = t3.re_pay_name GROUP BY loan,balance,re_pay_name HAVING count(1)>1 )  \r\n"
 			+ "			   ) a )t1      on t1.loan=BOs.loan and t1.balance=bos.balance and t1.re_pay_name=bos.re_pay_name  \r\n"
 			+ "			   ) hj  ";
 

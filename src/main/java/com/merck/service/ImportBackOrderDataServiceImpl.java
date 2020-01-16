@@ -263,6 +263,7 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                         selectData = mapper.selectData(sql);
 
                     }
+                    //4.3旧框架
                     if (sheetName.equalsIgnoreCase("Wei Zhu")) {
                         sheetName = "Pharma";
                     } else if (sheetName.equalsIgnoreCase("Adam xu")) {
@@ -280,6 +281,32 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                     } else if (sheetName.equalsIgnoreCase("Steve Vermant")) {
                         sheetName = "Business A";
                     }
+                    //4.3新框架
+                    //if (sheetName.equalsIgnoreCase("Wei Zhu")) {
+                    //    sheetName = "T1_East";
+                    //} else if (sheetName.equalsIgnoreCase("Adam xu")) {
+                    //    sheetName = "Digital";
+                    //}else if (sheetName.equalsIgnoreCase("Jason Song")) {
+                    //    sheetName = "T1_North & South";
+                    //} else if (sheetName.equalsIgnoreCase("Mingfei Guo")) {
+                    //    sheetName = "Diagnostic";
+                    //} else if (sheetName.equalsIgnoreCase("Seaman Wu")) {
+                    //    sheetName = "AA I&T";
+                    //} else if (sheetName.equalsIgnoreCase("George Ge")) {
+                    //    sheetName = "Business B";
+                    //}else if (sheetName.equalsIgnoreCase("Ida Li")) {
+                    //    sheetName = "T2_Northeast";
+                    //}else if (sheetName.equalsIgnoreCase("Weihan Yang")) {
+                    //    sheetName = "T2_West";
+                    //}else if (sheetName.equalsIgnoreCase("Kevin Xue")) {
+                    //    sheetName = "T2_Southeast";
+                    //}else if (sheetName.equalsIgnoreCase("Clark he")) {
+                    //    sheetName = "KA";
+                    //}else if (sheetName.equalsIgnoreCase("Fen Lu")) {
+                    //    sheetName = "DG";
+                    //}else if (sheetName.equalsIgnoreCase("Michael Ju")) {
+                    //    sheetName = "BM";
+                    //}
 
                     if (sheetName.equalsIgnoreCase("Business B")) {
                         System.out.println("------------");
@@ -369,6 +396,8 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                             if (key.toUpperCase().contains("NAME") || key.toUpperCase().contains("DESCRIPTION")) {
 
                                 sheet.setColumnWidth(f, 25 * 256);
+                            } else if (key.toUpperCase().contains("HEAD")) {
+                                sheet.setColumnWidth(f, 18 * 256);
                             } else if (key.replaceAll(" +", "").toUpperCase().contains("ORDERRELEASEMATRIX")) {
                                 sheet.setColumnWidth(f, 28 * 256);
                             } else {
@@ -389,6 +418,7 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                         for (Map.Entry<String, String> entry : maptitle.entrySet()) {
                             nCell = nRow.createCell(n++);
                             nCell.setCellValue(entry.getValue());
+                            //4.3旧框架
                             if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
                                     || map.containsKey("Channel") || map.containsKey("Mingfei Guo")
                                     || map.containsKey("George Ge") || map.containsKey("Adam xu")
@@ -396,6 +426,16 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                                     || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant & CFO")) {
 
                                 nCell.setCellStyle(headStyleAppli);
+                            //4.3新框架
+                            //if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
+                            //        || map.containsKey("Weihan Yang") || map.containsKey("Mingfei Guo")
+                            //        || map.containsKey("George Ge") || map.containsKey("Adam xu")
+                            //        || map.containsKey("Steve Vermant")||map.containsKey("Ida Li")
+                            //        || map.containsKey("Kevin Xue")||map.containsKey("Clark he")
+                            //        || map.containsKey("Fen Lu")||map.containsKey("Michael Ju")
+                            //        || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant & CFO")) {
+                            //
+                            //    nCell.setCellStyle(headStyleAppli);
                             } else {
 
                                 nCell.setCellStyle(headStyle);
@@ -435,6 +475,55 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                                         selectData.get(k).put("HEAD", "Business A");
                                     }
                                 }
+                            //4.3新框架
+                            //if (selectData.get(k).containsKey("HEAD")) {
+                            //    String saleHeadName = null;
+                            //    if (selectData.get(k).get("HEAD") != null) {
+                            //        saleHeadName = selectData.get(k).get("HEAD").toString();
+                            //        if (saleHeadName.equalsIgnoreCase("Wei Zhu")) {
+                            //            selectData.get(k).put("HEAD", "T1_East");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Adam xu")) {
+                            //            selectData.get(k).put("HEAD", "Digital");
+                            //        }
+                            //        //if (saleHeadName.equalsIgnoreCase("Channel")) {
+                            //        //    selectData.get(k).put("HEAD", "Channel");
+                            //        //}
+                            //        if (saleHeadName.equalsIgnoreCase("Jason Song")) {
+                            //            selectData.get(k).put("HEAD", "T1_North & South");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Mingfei Guo")) {
+                            //            selectData.get(k).put("HEAD", "Diagnostic");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Seaman Wu")) {
+                            //            selectData.get(k).put("HEAD", "AA I&T");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("George Ge")) {
+                            //            selectData.get(k).put("HEAD", "Business B");
+                            //        }
+                            //        //if (saleHeadName.equalsIgnoreCase("Steve Vermant")) {
+                            //        //    selectData.get(k).put("HEAD", "Business A");
+                            //        //}
+                            //        if (saleHeadName.equalsIgnoreCase("Ida Li")) {
+                            //            selectData.get(k).put("HEAD", "T2_Northeast");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Weihan Yang")) {
+                            //            selectData.get(k).put("HEAD", "T2_West");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Kevin Xue")) {
+                            //            selectData.get(k).put("HEAD", "T2_Southeast");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Clark he")) {
+                            //            selectData.get(k).put("HEAD", "KA");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Fen Lu")) {
+                            //            selectData.get(k).put("HEAD", "DG");
+                            //        }
+                            //        if (saleHeadName.equalsIgnoreCase("Michael Ju")) {
+                            //            selectData.get(k).put("HEAD", "BM");
+                            //        }
+
+                            //}
                             }
                             rowNo++;
                             nRow = sheet.createRow(++pageRowNo); // 新建行对象
@@ -455,11 +544,20 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                                         try {
                                             nCell.setCellValue(Double.valueOf(s2));
                                             String keys = entry.getKey();
+                                            //旧框架
                                             if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
                                                     || map.containsKey("Channel") || map.containsKey("Mingfei Guo")
-                                                    || map.containsKey("Seaman Wu") || map.containsKey("Seaman Wu")
+                                                    || map.containsKey("Seaman Wu")
                                                     || map.containsKey("George Ge") || map.containsKey("Steve Vermant")
                                                     || map.containsKey("Steve Vermant & CFO")) {
+                                            //新框架
+                                            //if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
+                                            //        || map.containsKey("Weihan Yang") || map.containsKey("Mingfei Guo")
+                                            //        || map.containsKey("George Ge") || map.containsKey("Adam xu")
+                                            //        || map.containsKey("Ida Li")
+                                            //        || map.containsKey("Kevin Xue")||map.containsKey("Clark he")
+                                            //        || map.containsKey("Fen Lu")||map.containsKey("Michael Ju")
+                                            //        || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant & CFO")) {
 
                                                 if ("CREDIT_VALUE".equals(keys) || "DAYS_30_M".equals(keys)
                                                         || "OPEN_ORDER".equals(keys) || "CREDIT_LIMIT".equals(keys)
@@ -494,13 +592,22 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                                             System.out.println(s2);
                                         }
                                     } else if (s1.matches("^-?\\d+%$")) {
-
+                                        //旧框架
                                         if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
                                                 || map.containsKey("Channel") || map.containsKey("Mingfei Guo")
                                                 || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant")
                                                 || map.containsKey("George Ge") || map.containsKey("Adam xu")
                                                 || map.containsKey("Steve Vermant & CFO")) {
                                             nCell.setCellStyle(cellStyleAppli);
+                                        //新框架
+                                        //if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
+                                        //        || map.containsKey("Weihan Yang") || map.containsKey("Mingfei Guo")
+                                        //        || map.containsKey("George Ge") || map.containsKey("Adam xu")
+                                        //        || map.containsKey("Ida Li")
+                                        //        || map.containsKey("Kevin Xue")||map.containsKey("Clark he")
+                                        //        || map.containsKey("Fen Lu")||map.containsKey("Michael Ju")
+                                        //        || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant & CFO")) {
+                                        //    nCell.setCellStyle(cellStyleAppli);
                                         } else {
 
                                             nCell.setCellStyle(cellStyle2);
@@ -511,12 +618,20 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                                     } else {
                                         nCell.setCellValue(s);
                                         String keys = entry.getKey();
-
+                                        //旧框架
                                         if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
                                                 || map.containsKey("Channel") || map.containsKey("Mingfei Guo")
                                                 || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant")
                                                 || map.containsKey("George Ge") || map.containsKey("Adam xu")
                                                 || map.containsKey("Steve Vermant & CFO")) {
+                                        //新框架
+                                        //if (map.containsKey("Wei Zhu") || map.containsKey("Jason Song")
+                                        //        || map.containsKey("Weihan Yang") || map.containsKey("Mingfei Guo")
+                                        //        || map.containsKey("George Ge") || map.containsKey("Adam xu")
+                                        //        || map.containsKey("Ida Li")
+                                        //        || map.containsKey("Kevin Xue")||map.containsKey("Clark he")
+                                        //        || map.containsKey("Fen Lu")||map.containsKey("Michael Ju")
+                                        //        || map.containsKey("Seaman Wu") || map.containsKey("Steve Vermant & CFO")) {
 
                                             if (keys.toUpperCase().contains("NAME")
                                                     || keys.toUpperCase().contains("DESCRIPTION")) {

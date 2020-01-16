@@ -158,7 +158,7 @@ public class SqlStr {
             "			               case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=2000000    \r\n" +
             "			               then 'Steve Vermant &    CFO'    \r\n" +
             "			               ELSE      \r\n" +
-            "			                   case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=500000 AND HEAD IN ('Adma xu', 'Jason Song', 'Channel', 'Wei Zhu') \r\n" +
+            "			                   case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=500000 AND HEAD IN ('Adma xu', 'Jason Song', 'Channel', 'Wei Zhu','Ida Li','Weihan Yang','Kevin Xue','Clark he','Fen Lu') \r\n" +
             "			                   THEN 'George Ge'    \r\n" +
             "			                   ELSE    \r\n" +
             "			                   case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=500000 \r\n" +
