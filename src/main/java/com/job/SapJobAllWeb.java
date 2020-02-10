@@ -339,41 +339,43 @@ public class SapJobAllWeb {
             for (Map<String, Object> saleHead : saleHeadList) {
                 list.add(saleHead.get("SALES_HEAD").toString());
             }
-            //旧框架
-            if (!list.contains("George Ge")) {
-                list.add("George Ge");
-            }
-            if (!list.contains("Steve Vermant & CFO")) {
-                list.add("Steve Vermant & CFO");
-            }
-            //新框架
-            //if (!list.contains("Ida Li")) {
-            //    list.add("Ida Li");
-            //}
-            //if (!list.contains("Weihan Yang")) {
-            //    list.add("Weihan Yang");
-            //}
-            //if (!list.contains("Kevin Xue")) {
-            //    list.add("Kevin Xue");
-            //}
-            //if (!list.contains("Clark he")) {
-            //    list.add("Clark he");
-            //}
-            //if (!list.contains("Fen Lu")) {
-            //    list.add("Fen Lu");
-            //}
-            //if (!list.contains("Michael Ju")) {
-            //    list.add("Michael Ju");
-            //}
-            //if (!list.contains("Mingfei Guo")) {
-            //    list.add("Mingfei Guo");
-            //}
+            //旧框架开始
             //if (!list.contains("George Ge")) {
             //    list.add("George Ge");
             //}
             //if (!list.contains("Steve Vermant & CFO")) {
             //    list.add("Steve Vermant & CFO");
             //}
+            //旧框架结束
+            //新框架开始
+            if (!list.contains("Ida Li")) {
+                list.add("Ida Li");
+            }
+            if (!list.contains("Weihan Yang")) {
+                list.add("Weihan Yang");
+            }
+            if (!list.contains("Kevin Xue")) {
+                list.add("Kevin Xue");
+            }
+            if (!list.contains("Clark he")) {
+                list.add("Clark he");
+            }
+            if (!list.contains("Fen Lu")) {
+                list.add("Fen Lu");
+            }
+            if (!list.contains("Michael Ju")) {
+                list.add("Michael Ju");
+            }
+            if (!list.contains("Mingfei Guo")) {
+                list.add("Mingfei Guo");
+            }
+            if (!list.contains("George Ge")) {
+                list.add("George Ge");
+            }
+            if (!list.contains("Steve Vermant & CFO")) {
+                list.add("Steve Vermant & CFO");
+            }
+            //新框架结束
             Map<String, Map<String, String>> titleMap = getTitleMap(target);
             Map<String, String> detail4 = titleMap.get("Steve Vermant & CFO");
             titleMap.remove("Steve Vermant & CFO");
@@ -386,17 +388,7 @@ public class SapJobAllWeb {
                     map2.put(list.get(i), com.merck.model.SqlStr.getOrderRelaseSql(
                             new String[]{" = '" + list.get(i) + "'", "'" + "SALESHEAD&CREDITMANAGEMENTHEAD" + "'"}));
                     str = str + "'" + list.get(i) + "',";
-                    //旧框架
-                    if (list.get(i).equalsIgnoreCase("Wei Zhu")) {
-                        str2 += "'" + list.get(i) + "',";
-                    } else if (list.get(i).equalsIgnoreCase("Jason Song")) {
-                        str2 += "'" + list.get(i) + "',";
-                    } else if (list.get(i).equalsIgnoreCase("Channel")) {
-                        str2 += "'" + list.get(i) + "',";
-                    } else if (list.get(i).equalsIgnoreCase("Adam xu")) {
-                        str2 += "'" + list.get(i) + "',";
-                    }
-                    //新框架
+                    //旧框架开始
                     //if (list.get(i).equalsIgnoreCase("Wei Zhu")) {
                     //    str2 += "'" + list.get(i) + "',";
                     //} else if (list.get(i).equalsIgnoreCase("Jason Song")) {
@@ -405,17 +397,29 @@ public class SapJobAllWeb {
                     //    str2 += "'" + list.get(i) + "',";
                     //} else if (list.get(i).equalsIgnoreCase("Adam xu")) {
                     //    str2 += "'" + list.get(i) + "',";
-                    //}else if (list.get(i).equalsIgnoreCase("Ida Li")) {
-                    //    str2 += "'" + list.get(i) + "',";
-                    //}else if (list.get(i).equalsIgnoreCase("Weihan Yang")) {
-                    //    str2 += "'" + list.get(i) + "',";
-                    //}else if (list.get(i).equalsIgnoreCase("Kevin Xue")) {
-                    //    str2 += "'" + list.get(i) + "',";
-                    //}else if (list.get(i).equalsIgnoreCase("Clark he")) {
-                    //    str2 += "'" + list.get(i) + "',";
-                    //}else if (list.get(i).equalsIgnoreCase("Fen Lu")) {
-                    //    str2 += "'" + list.get(i) + "',";
                     //}
+                    //旧框架结束
+                    //新框架开始
+                    if (list.get(i).equalsIgnoreCase("Wei Zhu")) {
+                        str2 += "'" + list.get(i) + "',";
+                    } else if (list.get(i).equalsIgnoreCase("Jason Song")) {
+                        str2 += "'" + list.get(i) + "',";
+                    } else if (list.get(i).equalsIgnoreCase("Channel")) {
+                        str2 += "'" + list.get(i) + "',";
+                    } else if (list.get(i).equalsIgnoreCase("Adam xu")) {
+                        str2 += "'" + list.get(i) + "',";
+                    }else if (list.get(i).equalsIgnoreCase("Ida Li")) {
+                        str2 += "'" + list.get(i) + "',";
+                    }else if (list.get(i).equalsIgnoreCase("Weihan Yang")) {
+                        str2 += "'" + list.get(i) + "',";
+                    }else if (list.get(i).equalsIgnoreCase("Kevin Xue")) {
+                        str2 += "'" + list.get(i) + "',";
+                    }else if (list.get(i).equalsIgnoreCase("Clark he")) {
+                        str2 += "'" + list.get(i) + "',";
+                    }else if (list.get(i).equalsIgnoreCase("Fen Lu")) {
+                        str2 += "'" + list.get(i) + "',";
+                    }
+                    //新框架结束
                 }
             }
             str2 += "'George Ge'";
@@ -736,19 +740,21 @@ public class SapJobAllWeb {
         //map.put("Channel", detail4);
         //map.put("Mingfei Guo", detail4);
         //map.put("Seaman Wu", detail4);
-        //旧框架
-        map.put("George Ge", detail4);
-        map.put("Steve Vermant & CFO", detail4);
-        //新框架
+        ////旧框架开始
         //map.put("George Ge", detail4);
         //map.put("Steve Vermant & CFO", detail4);
-        //map.put("Ida Li", detail4);
-        //map.put("Weihan Yang", detail4);
-        //map.put("Kevin Xue", detail4);
-        //map.put("Clark he", detail4);
-        //map.put("Fen Lu", detail4);
-        //map.put("Michael Ju", detail4);
-        //map.put("Mingfei Guo", detail4);
+        //旧框架结束
+        //新框架开始
+        map.put("George Ge", detail4);
+        map.put("Steve Vermant & CFO", detail4);
+        map.put("Ida Li", detail4);
+        map.put("Weihan Yang", detail4);
+        map.put("Kevin Xue", detail4);
+        map.put("Clark he", detail4);
+        map.put("Fen Lu", detail4);
+        map.put("Michael Ju", detail4);
+        map.put("Mingfei Guo", detail4);
+        //新框架结束
         return map;
 
     }
