@@ -723,7 +723,7 @@ public class SapJobAllWeb {
         Map<String, String> detail4 = new LinkedHashMap<String, String>();
         detail4.put("PARTNER", "Payer");
         detail4.put("DESCRIPTION", "Names");
-        detail4.put("HEAD", "Sales Head");
+        detail4.put("HEAD", "Team");
         detail4.put("RATING", "Rating");
         detail4.put("CREDIT_VALUE", "Order Value");
         detail4.put("RECEIVABLES", " Receivables");

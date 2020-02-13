@@ -395,7 +395,7 @@ public class ImportBackOrderDataServiceImpl implements ImportData {
                         //int f = 0;
                         for (Map.Entry<String, String> entry : maptitle.entrySet()) {
                             String key = entry.getValue();
-                            if (key.toUpperCase().contains("NAME") || key.toUpperCase().contains("DESCRIPTION")) {
+                            if (key.toUpperCase().contains("TEAM")||key.toUpperCase().contains("NAME") || key.toUpperCase().contains("DESCRIPTION")) {
 
                                 sheet.setColumnWidth(f, 25 * 256);
                             } else if (key.toUpperCase().contains("HEAD")) {
