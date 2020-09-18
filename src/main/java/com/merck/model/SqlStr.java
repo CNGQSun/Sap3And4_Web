@@ -42,11 +42,10 @@ public class SqlStr {
             "			     \r\n" +
             "			 select DISTINCT     \r\n" +
             "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,a.CREDIT_LIMIT,e.CC CC,a.CR_EXPOS EXPOSURE,    \r\n" +
-            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(c.TOTAL_AR, '0'), ',', '') as NUMERIC(20,2)) OPEN_ORDER,    \r\n" +
+            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-(cast(REPLACE(ISNULL(a.DAYS_030, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) OPEN_ORDER,    \r\n" +
             "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(a.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
-            "			 c.TOTAL_AR RECEIVABLES, (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
+            "			 (cast(REPLACE(ISNULL(a.DAYS_030, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) RECEIVABLES, (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
             "			 from BACK_ORDER_43 a    \r\n" +
-            "			 LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER    \r\n" +
             "			 LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER    \r\n" +
             "			 LEFT JOIN (    \r\n" +
             "			 select t1.CC,t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1    \r\n" +
@@ -95,11 +94,10 @@ public class SqlStr {
             "			     \r\n" +
             "			 select DISTINCT     \r\n" +
             "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION ,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,a.CREDIT_LIMIT,e.CC CC,a.CR_EXPOS EXPOSURE,    \r\n" +
-            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(c.TOTAL_AR, '0'), ',', '') as NUMERIC(20,2)) OPEN_ORDER,    \r\n" +
+            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-(cast(REPLACE(ISNULL(a.DAYS_030, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) OPEN_ORDER,    \r\n" +
             "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(a.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
-            "			 c.TOTAL_AR RECEIVABLES, (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
+            "			 (cast(REPLACE(ISNULL(a.DAYS_030, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) RECEIVABLES, (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
             "			 from BACK_ORDER_43 a    \r\n" +
-            "			 LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER    \r\n" +
             "			 LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER    \r\n" +
             "			 LEFT JOIN (    \r\n" +
             "			 select t1.CC,t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1    \r\n" +
@@ -113,7 +111,6 @@ public class SqlStr {
             + "		SELECT DISTINCT\r\n" + "			a.DOCUMENT_NUMBER,\r\n" + "			a.PARTNER,\r\n"
             + "			e.CC CC,\r\n" + "			rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) NAME1 \r\n" + "		FROM\r\n"
             + "			BACK_ORDER_43 a\r\n"
-            + "		LEFT JOIN ZCOP_AGING c ON a.PARTNER = c.CUSTOMER\r\n"
             + "			   LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER     LEFT JOIN ( \r\n"
             + "			   select t1.CC,t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1 \r\n"
             + "			   from PY_SALES_MAPPING t1      LEFT JOIN SIGMA t2 on t1.SALES=t2.SALES \r\n"
@@ -123,7 +120,7 @@ public class SqlStr {
 
     public static String No_Debt_Card = "  select *       from (      select DISTINCT   \r\n" +
             "			   a.DOCUMENT_NUMBER,a.PARTNER,e.CC CC,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) NAME1 ,  (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M       from BACK_ORDER_43 a  \r\n" +
-            "			   LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER      LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER  \r\n" +
+            "			   LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER  \r\n" +
             "			   LEFT JOIN (  \r\n" +
             "			   select t1.CC,t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1  \r\n" +
             "			   from PY_SALES_MAPPING t1       LEFT JOIN SIGMA t2 on t1.SALES=t2.SALES  \r\n" +
@@ -136,6 +133,7 @@ public class SqlStr {
             "select   PARTNER ,  \r\n" +
             "		  DESCRIPTION ,  \r\n" +
             "		  HEAD ,  \r\n" +
+            "		  SALES ,  \r\n" +
             "		  RATING ,  \r\n" +
             "		   RECEIVABLES ,  \r\n" +
             "		   \r\n" +
@@ -158,7 +156,7 @@ public class SqlStr {
             "			               case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=2000000    \r\n" +
             "			               then 'Steve Vermant &    CFO'    \r\n" +
             "			               ELSE      \r\n" +
-            "			                   case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=500000 AND HEAD IN ('Adma xu', 'Jason Song', 'Channel', 'Wei Zhu','Ida Li','Weihan Yang','Kevin Xue','Clark he','Fen Lu') \r\n" +
+            "			                   case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=500000 AND HEAD IN ('Adam xu', 'Jason Song', 'Channel', 'Wei Zhu','Ida Li','Weihan Yang','Kevin Xue','Clark he','Fen Lu') \r\n" +
             "			                   THEN 'George Ge'    \r\n" +
             "			                   ELSE    \r\n" +
             "			                   case when cast(REPLACE(ISNULL(tt.Exposure, '0'), ',', '') as NUMERIC(20,2))>=500000 \r\n" +
@@ -190,11 +188,10 @@ public class SqlStr {
             "			     \r\n" +
             "			 select DISTINCT     \r\n" +
             "			 a.DOCUMENT_NUMBER,a.PARTNER,rtrim(substring(a.DESCRIPTION,0,(charindex('/',a.DESCRIPTION)))) DESCRIPTION,a.TOTAL_AMT CREDIT_VALUE,a.EXTERNAL_REFER ,a.RISK_CLASS RISK,a.CREDIT_LIMIT,a.CR_EXPOS EXPOSURE,    \r\n" +
-            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(c.TOTAL_AR, '0'), ',', '') as NUMERIC(20,2)) OPEN_ORDER,    \r\n" +
+            "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-(cast(REPLACE(ISNULL(a.DAYS_030, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) OPEN_ORDER,    \r\n" +
             "			 cast(REPLACE(ISNULL(a.CR_EXPOS, '0'), ',', '') as NUMERIC(20,2))-cast(REPLACE(ISNULL(a.CREDIT_LIMIT, '0'), ',', '') as NUMERIC(20,2)) OVERRUNS,    \r\n" +
-            "			 c.TOTAL_AR RECEIVABLES, (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
+            "			 (cast(REPLACE(ISNULL(a.DAYS_030, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) RECEIVABLES, (cast(REPLACE(ISNULL(a.DAYS_3160, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_6190, '0'), ',', '') as NUMERIC(20,2))+cast(REPLACE(ISNULL(a.DAYS_91, '0'), ',', '') as NUMERIC(20,2))) DAYS_30_M  ,d.R_OR_B ,e.SALES ,e.BUINESS_HEAD,e.SALES_HEAD HEAD,e.NAME1 ,f.CUSTOMER_BEHAVIOR_SCORING RATING    \r\n" +
             "			 from BACK_ORDER_43 a    \r\n" +
-            "			 LEFT JOIN ZCOP_AGING c on a.PARTNER=c.CUSTOMER    \r\n" +
             "			 LEFT JOIN ORDERING d on a.PARTNER=d.CUSTOMER    \r\n" +
             "			 LEFT JOIN (    \r\n" +
             "			 select t1.PAYER PAYER,t1.SALES SALES,t2.SALES_HEAD SALES_HEAD,t2.BUINESS_HEAD BUINESS_HEAD,t1.NAME1    \r\n" +
@@ -208,6 +205,7 @@ public class SqlStr {
             ")ttt where  UPPER(replace(ORDER_RELEASE_MATRIX,' ',''))= ##   GROUP BY   PARTNER ,  \r\n" +
             "		  DESCRIPTION ,  \r\n" +
             "		  HEAD ,  \r\n" +
+            "		  SALES ,  \r\n" +
             "		  RATING ,  \r\n" +
             "		   RECEIVABLES ,  \r\n" +
             "		   \r\n" +

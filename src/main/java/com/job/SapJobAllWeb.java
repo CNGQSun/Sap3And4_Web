@@ -234,94 +234,6 @@ public class SapJobAllWeb {
             if (StringUtils.isNotBlank(updateSql)) {
                 mapper.saveOrUpdateData(updateSql);
             }
-            //// 导出数据 block order1226P
-            //Map<String, String> map = new LinkedHashMap<String, String>();
-            //map.put("无放单意见", com.merck.model.SqlStr.No_Bill_of_Lading_Opinion);
-            //map.put("无欠款卡单", com.merck.model.SqlStr.No_Debt_Card);
-            //// map.put("block order1226P", SqlStr.detail_Block);
-            //
-            //log.info("Sap4.3开始导出：无放单意见.xlsx、无欠款卡单.xlsx ，时间：" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //bean3.exportDataExcle(map, exportPath + "4.3 result1 final result file" + target + ".xlsx", "excle",
-            //        getTitleMap(target), target);
-            //log.info("Sap4.3导出结束：无放单意见.xlsx、无欠款卡单.xlsx ，时间：" + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //
-            //Map<String, String> mapblock = new LinkedHashMap<String, String>();
-            //mapblock.put("block order" + target, com.merck.model.SqlStr.detail_Block);
-            //
-            //log.info("Sap4.3开始导出：block order" + target + ".xlsx ，时间："
-            //        + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //bean3.exportDataExcle(mapblock, exportPath + "4.3 result1 block order" + target + ".xlsx", "excle",
-            //        getTitleMap(target), target);
-            //log.info("Sap4.3导出结束：block order" + target + ".xlsx ，时间："
-            //        + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //
-            //Map<String, String> mapRelease = new LinkedHashMap<String, String>();
-            //mapRelease.put("Release order" + target, com.merck.model.SqlStr.detail_Release);
-            //
-            //log.info("Sap4.3开始导出：Release order" + target + ".xlsx ，时间："
-            //        + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //bean3.exportDataExcle(mapRelease, exportPath + "4.3 result1 Release order" + target + ".xlsx", "excle",
-            //        getTitleMap(target), target);
-            //log.info("Sap4.3导出结束：Release order" + target + ".xlsx ，时间："
-            //        + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //
-            //Map<String, String> map2 = new LinkedHashMap<String, String>();
-            //
-            //String saleHeadSql = "SELECT DISTINCT SALES_HEAD FROM SIGMA WHERE SALES_HEAD !='Steve Vermant & CFO' AND SALES_HEAD IS NOT NULL ORDER BY SALES_HEAD ";
-            //List<Map<String, Object>> saleHeadList = mapper.selectData(saleHeadSql);
-            //
-            //List<String> list = new ArrayList<String>();
-            //for (Map<String, Object> saleHead : saleHeadList) {
-            //    list.add(saleHead.get("SALES_HEAD").toString());
-            //}
-            //
-            //if (!list.contains("George Ge")) {
-            //    list.add("George Ge");
-            //}
-            //if (!list.contains("Steve Vermant & CFO")) {
-            //    list.add("Steve Vermant & CFO");
-            //}
-            //Map<String, Map<String, String>> titleMap = getTitleMap(target);
-            //Map<String, String> detail4 = titleMap.get("Steve Vermant & CFO");
-            //titleMap.remove("Steve Vermant & CFO");
-            //titleMap.remove("George Ge");
-            //
-            //String str = "";
-            //String str2 = "";
-            //for (int i = 0; i < list.size() - 2; i++) {
-            //    if ((list.get(i) != "Steve Vermant & CFO") && (list.get(i) != "George Ge")) {
-            //        titleMap.put(list.get(i), detail4);
-            //        map2.put(list.get(i), com.merck.model.SqlStr.getOrderRelaseSql(
-            //                new String[]{" = '" + list.get(i) + "'", "'" + "SALESHEAD&CREDITMANAGEMENTHEAD" + "'"}));
-            //        str = str + "'" + list.get(i) + "',";
-            //        if (list.get(i).equalsIgnoreCase("Wei Zhu")) {
-            //            str2 += "'" + list.get(i) + "',";
-            //        } else if (list.get(i).equalsIgnoreCase("Jason Song")) {
-            //            str2 += "'" + list.get(i) + "',";
-            //        } else if (list.get(i).equalsIgnoreCase("Channel")) {
-            //            str2 += "'" + list.get(i) + "',";
-            //        } else if (list.get(i).equalsIgnoreCase("Adam xu")) {
-            //            str2 += "'" + list.get(i) + "',";
-            //        }
-            //    }
-            //}
-            //str2 += "'George Ge'";
-            //if (str.endsWith(",")) {
-            //    str = str.substring(0, str.lastIndexOf(","));
-            //}
-            //titleMap.put(list.get(list.size() - 2), detail4);
-            //titleMap.put(list.get(list.size() - 1), detail4);
-            //map2.put(list.get(list.size() - 2), com.merck.model.SqlStr.getOrderRelaseSql(
-            //        new String[]{" in ( " + str2 + ")", "'" + "GEORGEGE" + "'"}) + " order by head");
-            //map2.put(list.get(list.size() - 1), com.merck.model.SqlStr.getOrderRelaseSql(
-            //        new String[]{" in ( " + str + ")", "'" + "STEVEVERMANT&CFO" + "'"}) + " order by head");
-            //log.info("Sap4.3开始导出：order release application" + target + ".xlsx ，时间："
-            //        + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-            //bean3.exportDataExcle(map2, exportPath + "4.3 result2 order release application" + target + ".xlsx",
-            //        "excle", titleMap, target);
-            //log.info("Sap4.3导出结束：order release application" + target + ".xlsx ，时间："
-            //        + DateUtils.format(new Date(), "yyyy-MM-dd HH:mm:ss"));
-
             //4.3 result1 Release order
             Map<String, String> mapRelease = new LinkedHashMap<String, String>();
             mapRelease.put("Release order" + target, com.merck.model.SqlStr.detail_Release);
@@ -724,6 +636,7 @@ public class SapJobAllWeb {
         detail4.put("PARTNER", "Payer");
         detail4.put("DESCRIPTION", "Names");
         detail4.put("HEAD", "Team");
+        detail4.put("SALES", "Sales");
         detail4.put("RATING", "Rating");
         detail4.put("CREDIT_VALUE", "Order Value");
         detail4.put("RECEIVABLES", " Receivables");

@@ -117,51 +117,54 @@ public class CSVUtil {
 			br = new BufferedReader(isr);
 			while ((line = br.readLine()) != null) {
 				String[] cells = line.split("\t");
-				List<String> row = new ArrayList<String>();
-				for (String c : cells) {
-					System.out.println(c);
-					String s = CSVUtil.clearStartAndEndQuote(c);
-					row.add(s);
-				}
-				if (!isTitleCloum) {
-					if (row.containsAll(title)) {
-						curRow2 = curRow;
-						for (int i = 0; i < cells.length; i++) {
-							if(StringUtils.isNoneBlank(row.get(i))) {
-								titleCsv.put(i, row.get(i));
-							}
-						} 
-						
-						isTitleCloum = true;
-					} else {
-						curRow++;
-						continue;
+				int length=cells.length;
+				if (length>=12){
+					List<String> row = new ArrayList<String>();
+					for (String c : cells) {
+						System.out.println(c);
+						String s = CSVUtil.clearStartAndEndQuote(c);
+						row.add(s);
 					}
-				}
+					if (!isTitleCloum) {
+						if (row.containsAll(title)) {
+							curRow2 = curRow;
+							for (int i = 0; i < cells.length; i++) {
+								if(StringUtils.isNoneBlank(row.get(i))) {
+									titleCsv.put(i, row.get(i));
+								}
+							}
 
-				// 加入到行集合中
-				if (curRow > curRow2 && row.size() > 0) {
-					boolean flg = false;
-					for (String string : row) {
-						if (StringUtils.isNoneBlank(string)) {
-							flg = true;
-							break;
+							isTitleCloum = true;
+						} else {
+							curRow++;
+							continue;
 						}
 					}
-					if (flg) {
-						rows.add(row);
-						int numFlgs=numFlg++;
-						indexList.add(numFlgs+"");
-					}
 
-					if (!CollectionUtils.isEmpty(rows) && rows.size() % 200 == 0) {
-						service.insertData(rows, titleCsv,"csv",tableName,indexList);
-						rows.clear();
-						indexList.clear();
-					}
+					// 加入到行集合中
+					if (curRow > curRow2 && row.size() > 0) {
+						boolean flg = false;
+						for (String string : row) {
+							if (StringUtils.isNoneBlank(string)) {
+								flg = true;
+								break;
+							}
+						}
+						if (flg) {
+							rows.add(row);
+							int numFlgs=numFlg++;
+							indexList.add(numFlgs+"");
+						}
 
+						if (!CollectionUtils.isEmpty(rows) && rows.size() % 200 == 0) {
+							service.insertData(rows, titleCsv,"csv",tableName,indexList);
+							rows.clear();
+							indexList.clear();
+						}
+
+					}
+					curRow++;
 				}
-				curRow++;
 			}
 
 			if (!CollectionUtils.isEmpty(rows)) {

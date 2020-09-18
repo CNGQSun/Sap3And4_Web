@@ -61,7 +61,7 @@ public class SqlStr {
 	//		+ "			   ) a )t1      on t1.loan=BOs.loan and t1.balance=bos.balance and t1.re_pay_name=bos.re_pay_name  \r\n"
 	//		+ "			   ) hj  ";
 
-	////修改后
+	//修改后
 	public static final String export_data3 = "  with ps as(      select  *  from (      select   TRA_DAY  \r\n"
 			+ "			   , BORROW      , LOAN      , BALANCE      , ABSTRACT      , RE_PAY_NAME  \r\n"
 			+ "			   , RE_PAY_AC      , TRA_TYPE      , STACEY_YIN      , NEED_CHECK      , ACCOUNT  \r\n"
@@ -70,7 +70,7 @@ public class SqlStr {
 			+ "			   select * from BLANK_ORDER b      left JOIN BACK_ORDER a on   \r\n"
 			+ "			   ( a.created_on > =(select convert(varchar(20),dateadd(month,-1,b.tra_day),120))   \r\n"
 			+ "			    and SUBSTRING(a.created_on, 0, 10) <=b.tra_day and b.re_pay_name=a.description and a.payt='PPD' and (risk_class='YS1' OR risk_class='YSN') )   \r\n"
-			+ "			   )t where len(loan)>0 )tt where total_amt <= CAST(loan as numeric(20, 2)) + 1 ),  \r\n"
+			+ "			   )t where len(loan)>0 )tt where CAST(REPLACE(ISNULL(TOTAL_AMT, '0'), ',', '') AS NUMERIC(20, 2)) <= CAST(REPLACE(ISNULL(loan, '0'), ',', '') AS numeric(20, 2)) + 1 ),  \r\n"
 			+ " gge AS (SELECT *,total =cast(REPLACE(ISNULL(TOTAL_AMT, '0'), ',', '') as NUMERIC(20,2)),pos = CAST(DOCUMENT_NUMBER AS varchar(8000)) \r\n"
 			+ " FROM ps \r\n"
 			+ " UNION ALL \r\n"
@@ -86,10 +86,10 @@ public class SqlStr {
 			+ "gg AS( \r\n"
 			+ "       SELECT * \r\n"
 			+ "       FROM gge \r\n"
-			+ "       WHERE  (((total_amt <= CAST(loan AS numeric(20, 2)) + 1 \r\n"
-			+ " AND total_amt >= CAST(loan AS numeric(20, 2)) - 1)AND total=total_amt) \r\n"
-			+ " OR (total <= CAST(loan AS numeric(20, 2)) + 1 \r\n"
-			+ " AND total >= CAST(loan AS numeric(20, 2)) - 1)) \r\n"
+			+ "       WHERE  (((total_amt <= CAST(REPLACE(ISNULL(loan, '0'), ',', '') AS numeric(20, 2)) + 1 \r\n"
+			+ " AND total_amt >= CAST(REPLACE(ISNULL(loan, '0'), ',', '') AS numeric(20, 2)) - 1)AND total=total_amt) \r\n"
+			+ " OR (total <= CAST(REPLACE(ISNULL(loan, '0'), ',', '') AS numeric(20, 2)) + 1 \r\n"
+			+ " AND total >= CAST(REPLACE(ISNULL(loan, '0'), ',', '') AS numeric(20, 2)) - 1)) \r\n"
 			+ "       ), \r\n"
 			+ "			   hh as (select   TRA_DAY      , BORROW      , LOAN      , BALANCE      , ABSTRACT  \r\n"
 			+ "			   , RE_PAY_NAME      , RE_PAY_AC      , TRA_TYPE      , STACEY_YIN      , NEED_CHECK  \r\n"
@@ -108,7 +108,7 @@ public class SqlStr {
 			+ "			   , ABSTRACT      , RE_PAY_NAME      , RE_PAY_AC      , TRA_TYPE      , STACEY_YIN  \r\n"
 			+ "			   , NEED_CHECK      , ACCOUNT      ,SPHIL_YU      ,PARTNER PAYER,PO=(    \r\n"
 			+ "			   select pos from gg as b where a.loan=b.loan and a.balance=b.balance and a.re_pay_name=b.re_pay_name)  from (select * from gg t2 where not  \r\n"
-			+ "			   EXISTS (select 1 from gg t3 where t2.loan=t3.loan AND t2.balance = t3.balance AND t2.re_pay_name = t3.re_pay_name GROUP BY loan,balance,re_pay_name HAVING count(1)>1 )  \r\n"
+			+ "			   EXISTS (select 1 from gg t3 where t2.loan=t3.loan AND t2.balance = t3.balance AND t2.re_pay_name = t3.re_pay_name  GROUP BY loan,balance,re_pay_name HAVING count(1)>1 )  \r\n"
 			+ "			   ) a )t1      on t1.loan=BOs.loan and t1.balance=bos.balance and t1.re_pay_name=bos.re_pay_name  \r\n"
 			+ "			   ) hj  ";
 
@@ -156,5 +156,5 @@ public class SqlStr {
 			"left join BACK_ORDER a on ( a.created_on > =(select convert(varchar(20),dateadd(month,-1,b.tra_day),120)) \r\n" + 
 			"			  and SUBSTRING(a.created_on, 0, 10) <=b.tra_day and b.re_pay_name=a.description and a.payt='PPD' and risk_class='YS1' )\r\n" + 
 			"where len(isnull(b.payer,''))!=0 and (b.po is null or len(b.po)=0) and \r\n" + 
-			"a.total_amt not BETWEEN cast(b.loan as numeric(20,2))-1 and cast(b.loan as numeric(20,2))+1";
+			"CAST(REPLACE(ISNULL(a.total_amt, '0'), ',', '') AS NUMERIC(20, 2)) NOT BETWEEN CAST(REPLACE(ISNULL(b.loan, '0'), ',', '') AS numeric(20, 2)) - 1 AND CAST(REPLACE(ISNULL(b.loan, '0'), ',', '') AS numeric(20, 2)) + 1";
 }
