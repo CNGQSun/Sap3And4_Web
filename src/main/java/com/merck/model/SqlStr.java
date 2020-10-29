@@ -142,7 +142,7 @@ public class SqlStr {
             "		  CREDIT_LIMIT ,  \r\n" +
             "		  EXPOSURE ,  \r\n" +
             "		  OVERRUNS ,  \r\n" +
-            "		  DEVIATION_PERCENT,sum(cast(CREDIT_VALUE as NUMERIC(20,2))) CREDIT_VALUE  from(\r\n" +
+            "		  DEVIATION_PERCENT,sum(cast(REPLACE(CREDIT_VALUE,',','') as NUMERIC(20,2))) CREDIT_VALUE  from(\r\n" +
             "\r\n" +
             "select tt.*,    \r\n" +
             "			 case when tt.overruns>0    \r\n" +
